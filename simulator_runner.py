@@ -17,5 +17,5 @@ from bokeh.models import glyph
 
 plt = figure(width=2550, height=1250, x_range=(-0.5, 20), y_range=(-0.5, 20), x_axis_label='x')
 plt.scatter([0, 1, 2, 3], [1, 6, 8, 9])
-
+# TODO: Extract "1"'s coordinates and punch in graph server.
 show(plt)
