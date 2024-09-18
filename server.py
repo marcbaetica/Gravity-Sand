@@ -1,5 +1,5 @@
 from flask import Flask
-from pixel_structure import Display
+from sand_simulation import Display
 
 app = Flask(__name__)
 display = Display()
