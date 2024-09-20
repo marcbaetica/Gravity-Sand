@@ -51,11 +51,20 @@ def callback():
     plot_data_struct.data = new_data
 
 
+# # add a button widget and configure with the call back
+# button = Button(label="Press Me")
+# button.on_event('button_click', callback)
+#
+# # put the button and plot in a layout and add to the document
+# curdoc().add_root(column(button, plt))
+
+
 # add a button widget and configure with the call back
 button = Button(label="Press Me")
 button.on_event('button_click', callback)
 
 # put the button and plot in a layout and add to the document
 curdoc().add_root(column(button, plt))
+
 
 # bokeh serve --show simulator_runner.py
