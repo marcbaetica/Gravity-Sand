@@ -10,7 +10,7 @@ s_soc.listen(1)
 while True:
     client_soc, ret_address = s_soc.accept()
     print(client_soc, ret_address)
-    print(type(client_soc), type(ret_address))
-    print(client_soc.recv(128).decode())
+    # print(type(client_soc), type(ret_address))
+    print(client_soc.recv(12800).decode())
     print(client_soc.send('hello from server!'.encode()))
 
