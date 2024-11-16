@@ -36,3 +36,7 @@ def run_scenario():
 
 run_scenario()
 
+import queue
+
+print(dir(queue.LifoQueue))
+
