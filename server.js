@@ -54,3 +54,56 @@ c_soc.on('error', function(error) {  // Triggers 'close' event after execution.
   console.log(error)
 })
 
+// Doesn't work.
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms));
+// }
+
+// Also doesn't work.
+// for (let i=0; i<5; i++) {
+//   setTimeout(function() {
+//     c_soc.write(i.toString())
+//     console.log(`Sent ${i}.`)
+//   }, 1000)
+// }
+
+
+// TODO: Stupid implementation but works for now.
+function sleep(sec, funct, input) {
+  date = new Date()
+  date.setSeconds(date.getSeconds() + sec)
+  while(true) {
+    new_date = new Date()
+    if(new_date > date) {
+      console.log('1 sec passed!')
+      // funct(input)
+      funct(input.toString())
+      break
+    }
+  }
+}
+
+
+// TODO: Stupid implementation but works for now.
+function sleep(sec, funct) {
+  date = new Date()
+  date.setSeconds(date.getSeconds() + sec)
+  while(true) {
+    new_date = new Date()
+    if(new_date > date) {
+      console.log('1 sec passed!')
+      // funct(input)
+      funct()
+      break
+    }
+  }
+}
+
+
+for (i=0; i<6; i++) {
+  c_soc.write(i.toString())
+  // sleep(1, c_soc.write, i.toString())
+  // sleep(1, c_soc.write)
+  console.log(i)
+}
+

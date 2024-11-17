@@ -11,5 +11,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soc:
     c_soc, addr = soc.accept()
     print(f'Have client socket {c_soc} at {addr}.')
     c_soc.send('Hello from server!'.encode())
-    print(c_soc.recv(1028).decode())
+    while True:
+        print(c_soc.recv(1028).decode())
 

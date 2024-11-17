@@ -1,0 +1,16 @@
+node (socket) sends python (socket):
+- close = -1
+- 'KeyW' = up
+- 'KeyA' = left
+- 'KeyS' = down
+- 'KeyD' = right
+
+python (socket) sends node (socket):
+- new_position = (x, y)
+
+browser (html render) sends node (server):
+- key if one of the above ones via POST /keystorke
+
+node (sever) sends browser (html render):
+- TBD how to update positon without refreshing
+
