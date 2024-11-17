@@ -3,14 +3,13 @@ import socket
 
 print('server socket!')
 
-s_soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s_soc.bind(('localhost', 9999))
-s_soc.listen(1)
-
-while True:
-    client_soc, ret_address = s_soc.accept()
-    print(client_soc, ret_address)
-    # print(type(client_soc), type(ret_address))
-    print(client_soc.recv(12800).decode())
-    print(client_soc.send('hello from server!'.encode()))
+# Exiting context manager is equivalent to calling close().
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soc:
+    soc.bind(('localhost', 8500))  # '' addr for any.
+    soc.listen(5)
+    # TODO: Add logic to actually handle 5 connections.
+    c_soc, addr = soc.accept()
+    print(f'Have client socket {c_soc} at {addr}.')
+    c_soc.send('Hello from server!'.encode())
+    print(c_soc.recv(1028).decode())
 
