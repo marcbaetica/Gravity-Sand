@@ -35,6 +35,7 @@ const net = require('net')
 
 const HOST = 'localhost'
 const PORT = 8500
+var is_write_buffer_empty = true
 
 var c_soc = new net.Socket()
 c_soc.connect(PORT, HOST, function() {
@@ -52,6 +53,11 @@ c_soc.on('close', function() {
 c_soc.on('error', function(error) {  // Triggers 'close' event after execution.
   console.log('There was an error. Closing connection. Error:')
   console.log(error)
+})
+
+c_soc.on('drain', function() {
+  console.log('drained triggered')
+  is_write_buffer_empty = true
 })
 
 // Doesn't work.
@@ -100,10 +106,25 @@ function sleep(sec, funct) {
 }
 
 
-for (i=0; i<6; i++) {
-  c_soc.write(i.toString())
-  // sleep(1, c_soc.write, i.toString())
-  // sleep(1, c_soc.write)
-  console.log(i)
+data = [1, 2, 3, 4, 5]
+// console.log(typeof data)
+// for (i=0; i<6; i++) {
+  // console.log(data)
+// }
+
+// for(var m in data) {
+  // console.log(m, data[m])
+// }
+
+while (data.length > 0) {
+  if (is_write_buffer_empty) {
+    c_soc.write(`${data.pop().toString()}\r\n`)
+    console.log(data)
+    console.log(c_soc.bytesWritten)
+    console.log(c_soc.pending)
+    console.log(c_soc.remoteFamily)
+    is_write_buffer_empty = false
+    console.log(is_write_buffer_empty)
+  }
 }
 
